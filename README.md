@@ -1,6 +1,8 @@
-# Power BI Dashboard for Tracking DT Vandalization
+# Power BI Dashboard for Tracking DT Vandalization(https://app.powerbi.com/links/DGreuj1wA9?ctid=581816b2-c0be-4eaa-80e3-29e5f2486494&pbi_source=linkShare)
 ## Overview and Purpose:
 The dashboard effectively serves as an operational monitoring tool for tracking incidents affecting Distribution Transformers (DTs) vandalization across Ikeja Electric's service areas. This is a crucial application for an electric utility, as DTs are critical infrastructure components that transform voltage levels for distribution to end customers. Tracking vandalization incidents at these points helps prioritize maintenance, understand failure patterns, and improve service reliability.
+
+![Image](https://github.com/user-attachments/assets/1af80b88-1a76-4edd-851e-3ad14a42c472)
 
 ## Dashboard Component Analysis:
 
