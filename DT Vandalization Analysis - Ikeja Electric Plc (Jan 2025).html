@@ -1,0 +1,1243 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DT Vandalization Analysis - Ikeja Electric Plc (Jan 2025)</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@3.7.0/dist/chart.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.4/css/all.min.css">
+    <style>
+        :root {
+            --ikeja-blue: #0053A0;
+            --ikeja-orange: #F47920;
+            --ikeja-light-blue: #E6F0F9;
+            --ikeja-light-orange: #FDE8D7;
+        }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            color: #333;
+            background-color: #f9f9f9;
+        }
+        .slide {
+            min-height: 100vh;
+            padding: 2rem;
+            border-bottom: 1px dashed #ccc;
+            background-color: white;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            margin-bottom: 2rem;
+        }
+        .slide-title {
+            color: var(--ikeja-blue);
+            border-bottom: 3px solid var(--ikeja-orange);
+            padding-bottom: 0.5rem;
+            margin-bottom: 1.5rem;
+        }
+        .highlight {
+            color: var(--ikeja-orange);
+            font-weight: bold;
+        }
+        .card {
+            background-color: white;
+            border-radius: 0.5rem;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            padding: 1rem;
+            border-left: 4px solid var(--ikeja-orange);
+        }
+        .insight-card {
+            background-color: var(--ikeja-light-blue);
+            border-left: 4px solid var(--ikeja-blue);
+        }
+        .nav-buttons {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 2rem;
+        }
+        .nav-button {
+            background-color: var(--ikeja-blue);
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 0.25rem;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            font-weight: 500;
+        }
+        .nav-button:hover {
+            background-color: #00437f;
+        }
+        .chart-container {
+            position: relative;
+            height: 300px;
+            margin: 1rem 0;
+        }
+        .ikeja-bg-blue {
+            background-color: var(--ikeja-light-blue);
+        }
+        .ikeja-bg-orange {
+            background-color: var(--ikeja-light-orange);
+        }
+        table {
+            border-collapse: collapse;
+            width: 100%;
+        }
+        th {
+            background-color: var(--ikeja-blue);
+            color: white;
+            text-align: left;
+            padding: 0.75rem;
+        }
+        td {
+            border: 1px solid #ddd;
+            padding: 0.75rem;
+        }
+        tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+        .recommendation {
+            border-left: 4px solid var(--ikeja-orange);
+            padding-left: 1rem;
+            margin-bottom: 1rem;
+        }
+        .map-placeholder {
+            background-color: var(--ikeja-light-blue);
+            border: 1px dashed var(--ikeja-blue);
+            height: 400px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border-radius: 0.5rem;
+            margin: 1rem 0;
+            position: relative;
+            overflow: hidden;
+        }
+        .map-point {
+            position: absolute;
+            width: 12px;
+            height: 12px;
+            background-color: var(--ikeja-orange);
+            border-radius: 50%;
+            transform: translate(-50%, -50%);
+        }
+        .map-point.resolved {
+            background-color: #4CAF50;
+        }
+        .map-point.ongoing {
+            background-color: #F44336;
+        }
+        .map-point:hover::after {
+            content: attr(data-info);
+            position: absolute;
+            top: -30px;
+            left: 50%;
+            transform: translateX(-50%);
+            background-color: rgba(0, 0, 0, 0.8);
+            color: white;
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-size: 12px;
+            white-space: nowrap;
+            z-index: 10;
+        }
+        .map-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0.2;
+            object-fit: cover;
+        }
+         {
+            .slide {
+                box-shadow: none;
+                border-bottom: none;
+                page-break-inside: avoid;
+                margin-bottom: 0;
+            }
+            .nav-buttons {
+                display: none;
+            }
+        }
+    </style>
+</head>
+<body class="mx-auto max-w-6xl">
+    <!-- Slide 1: Title Slide -->
+    <div id="slide1" class="slide flex flex-col justify-center items-center text-center">
+        <div class="w-20 h-20 rounded-full bg-blue-500 mb-6 flex items-center justify-center">
+            <i class="fas fa-bolt text-white text-3xl"></i>
+        </div>
+        <h1 class="text-4xl font-bold mb-2" style="color: var(--ikeja-blue);">DT Vandalization Analysis Report</h1>
+        <h2 class="text-2xl mb-6" style="color: var(--ikeja-orange);">January 2025 Incidents</h2>
+        <h3 class="text-xl mb-10">Ikeja Electric Plc</h3>
+        <p class="text-gray-600 mb-2">Security Operations Division</p>
+        <p class="text-gray-600">March 2025</p>
+    </div>
+
+    <!-- Slide 2: Executive Summary -->
+    <div id="slide2" class="slide">
+        <h2 class="slide-title text-3xl font-bold">Executive Summary</h2>
+        
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+            <div class="card">
+                <h3 class="text-xl font-bold mb-3" style="color: var(--ikeja-blue);">Report Overview</h3>
+                <p class="mb-4">This analysis examines distribution transformer (DT) vandalization incidents reported in January 2025 across Ikeja Electric's service areas, providing insights into patterns and offering recommendations for security response.</p>
+                <div class="flex items-center mb-2">
+                    <div class="w-3 h-3 rounded-full mr-2" style="background-color: var(--ikeja-orange);"></div>
+                    <p><span class="font-bold">19</span> Total Incidents Analyzed</p>
+                </div>
+                <div class="flex items-center mb-2">
+                    <div class="w-3 h-3 rounded-full mr-2" style="background-color: var(--ikeja-blue);"></div>
+                    <p><span class="font-bold">11</span> Resolved Cases</p>
+                </div>
+                <div class="flex items-center">
+                    <div class="w-3 h-3 rounded-full mr-2" style="background-color: #F44336;"></div>
+                    <p><span class="font-bold">8</span> Ongoing Investigations</p>
+                </div>
+            </div>
+            
+            <div class="card insight-card">
+                <h3 class="text-xl font-bold mb-3" style="color: var(--ikeja-blue);">Key Findings</h3>
+                <ul class="list-disc pl-5 space-y-2">
+                    <li><span class="font-bold">Primary Targets:</span> 500mm² single core cables are consistently targeted</li>
+                    <li><span class="font-bold">Affected Areas:</span> Incidents spread across multiple business units with Ikorodu and Oshodi most impacted</li>
+                    <li><span class="font-bold">Ownership Pattern:</span> Predominantly public transformers (95% of cases)</li>
+                    <li><span class="font-bold">Capacity Pattern:</span> 500KVA transformers are most vulnerable (80% of incidents)</li>
+                    <li><span class="font-bold">Geographic Pattern:</span> Possible clustering suggesting organized criminal activity</li>
+                </ul>
+            </div>
+        </div>
+        
+        <div class="bg-gray-100 p-4 rounded-lg">
+            <h3 class="text-xl font-bold mb-3" style="color: var(--ikeja-blue);">Analysis Purpose</h3>
+            <p>This report aims to help security teams:</p>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mt-4">
+                <div class="bg-white p-3 rounded shadow-sm">
+                    <i class="fas fa-map-marked-alt text-2xl mb-2" style="color: var(--ikeja-orange);"></i>
+                    <p>Identify high-risk locations for targeted security deployment</p>
+                </div>
+                <div class="bg-white p-3 rounded shadow-sm">
+                    <i class="fas fa-chart-line text-2xl mb-2" style="color: var(--ikeja-orange);"></i>
+                    <p>Detect patterns to predict and prevent future incidents</p>
+                </div>
+                <div class="bg-white p-3 rounded shadow-sm">
+                    <i class="fas fa-shield-alt text-2xl mb-2" style="color: var(--ikeja-orange);"></i>
+                    <p>Develop effective countermeasures based on data insights</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Slide 3: Geographic Distribution of Incidents -->
+    <div id="slide3" class="slide">
+        <h2 class="slide-title text-3xl font-bold">Geographic Distribution of Incidents</h2>
+        
+        <div class="map-placeholder">
+            <img src="https://cdn.jsdelivr.net/gh/lipis/flag-icons@6.11.0/assets/docs/img/lagos-map.png" class="map-bg" alt="Lagos Map Background">
+            
+            <!-- Dynamically positioned dots based on incident locations -->
+            <div class="map-point resolved" style="top: 45%; left: 55%;" data-info="Oshodi - Isheri Olofin - Resolved"></div>
+            <div class="map-point resolved" style="top: 42%; left: 65%;" data-info="Shomolu - Coker Roundabout - Resolved"></div>
+            <div class="map-point resolved" style="top: 40%; left: 67%;" data-info="Shomolu - Adebayo Mokuolu - Resolved"></div>
+            <div class="map-point resolved" style="top: 30%; left: 52%;" data-info="Abule-Egba - Alowonle - Resolved"></div>
+            <div class="map-point resolved" style="top: 32%; left: 66%;" data-info="Abule-Egba - Arifanla - Resolved"></div>
+            <div class="map-point resolved" style="top: 42%; left: 60%;" data-info="Oshodi - Ajao - Resolved"></div>
+            <div class="map-point resolved" style="top: 32%; left: 70%;" data-info="Ikorodu - Adeite - Resolved"></div>
+            <div class="map-point resolved" style="top: 42%; left: 65%;" data-info="Shomolu - Bishop - Resolved"></div>
+            <div class="map-point ongoing" style="top: 50%; left: 58%;" data-info="Oshodi - Abiodun Lawson - Ongoing"></div>
+            <div class="map-point ongoing" style="top: 40%; left: 67%;" data-info="Ikeja - TCC - Ongoing"></div>
+            <div class="map-point ongoing" style="top: 45%; left: 72%;" data-info="Ikorodu - Jesse Jetta - Ongoing"></div>
+            <div class="map-point ongoing" style="top: 40%; left: 73%;" data-info="Ikorodu - HVDS Pole - Ongoing"></div>
+            <div class="map-point ongoing" style="top: 40%; left: 50%;" data-info="Akowonjo - Gold Estate - Ongoing"></div>
+            <div class="map-point ongoing" style="top: 35%; left: 62%;" data-info="Abule-Egba - Grailand - Ongoing"></div>
+            <div class="map-point ongoing" style="top: 35%; left: 72%;" data-info="Ikorodu - Rofo III - Ongoing"></div>
+            <div class="map-point ongoing" style="top: 37%; left: 73%;" data-info="Ikorodu - Suara - Ongoing"></div>
+            <div class="map-point ongoing" style="top: 38%; left: 57%;" data-info="Akowonjo - Primatek Plaza - Ongoing"></div>
+            
+            <div class="absolute bottom-2 right-2 bg-white px-2 py-1 rounded text-sm">
+                <span class="flex items-center"><span class="inline-block w-3 h-3 bg-green-500 rounded-full mr-1"></span> Resolved</span>
+                <span class="flex items-center"><span class="inline-block w-3 h-3 bg-red-500 rounded-full mr-1"></span> Ongoing</span>
+            </div>
+        </div>
+        
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mt-6">
+            <div class="card">
+                <h3 class="text-xl font-bold mb-3" style="color: var(--ikeja-blue);">Key Geographic Insights</h3>
+                <ul class="list-disc pl-5 space-y-2">
+                    <li><span class="font-bold">Hotspot Areas:</span> Ikorodu and Oshodi business units show the highest concentration of incidents</li>
+                    <li><span class="font-bold">Resolution Pattern:</span> Geographical variance in case resolution rates may indicate resource allocation challenges</li>
+                    <li><span class="font-bold">Urban Concentration:</span> Incidents cluster near major urban centers and transportation corridors</li>
+                    <li><span class="font-bold">Boundary Areas:</span> Several incidents occur near service territory boundaries, potentially indicating escape route planning</li>
+                </ul>
+            </div>
+            
+            <div class="card insight-card">
+                <h3 class="text-xl font-bold mb-3" style="color: var(--ikeja-blue);">Security Implications</h3>
+                <p class="mb-3">The geographic distribution suggests:</p>
+                <ul class="list-disc pl-5 space-y-2">
+                    <li>Possible organized criminal activity with strategic targeting</li>
+                    <li>Knowledge of electrical infrastructure vulnerabilities</li>
+                    <li>Careful selection of locations with quick escape routes</li>
+                    <li>Need for targeted patrols in identified hotspot areas</li>
+                    <li>Coordination with neighboring utilities and authorities to address boundary vulnerabilities</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <!-- Slide 4: Incident Analysis by Business Unit -->
+    <div id="slide4" class="slide">
+        <h2 class="slide-title text-3xl font-bold">Incident Analysis by Business Unit</h2>
+        
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-6">
+            <div class="col-span-2">
+                <div class="chart-container">
+                    <canvas id="businessUnitChart"></canvas>
+                </div>
+            </div>
+            
+            <div class="card insight-card">
+                <h3 class="text-xl font-bold mb-3" style="color: var(--ikeja-blue);">Key Insights</h3>
+                <ul class="list-disc pl-5 space-y-2">
+                    <li><span class="font-bold">Ikorodu (5):</span> Highest number of incidents, critical priority area</li>
+                    <li><span class="font-bold">Oshodi (4):</span> Second highest concentration, significant security concern</li>
+                    <li><span class="font-bold">Abule-Egba (3):</span> Emerging pattern of vulnerability</li>
+                    <li><span class="font-bold">Shomolu (3):</span> Multiple incidents, but higher resolution rate</li>
+                    <li><span class="font-bold">Other BUs:</span> Lower incident rates but still requiring monitoring</li>
+                </ul>
+            </div>
+        </div>
+        
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div class="card">
+                <h3 class="text-xl font-bold mb-3" style="color: var(--ikeja-blue);">Business Unit Vulnerability Analysis</h3>
+                <table class="w-full">
+                    <thead>
+                        <tr>
+                            <th>Business Unit</th>
+                            <th>Total Incidents</th>
+                            <th>Resolution Rate</th>
+                            <th>Risk Level</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Ikorodu</td>
+                            <td>5</td>
+                            <td>20%</td>
+                            <td><span class="px-2 py-1 bg-red-100 text-red-800 rounded">High</span></td>
+                        </tr>
+                        <tr>
+                            <td>Oshodi</td>
+                            <td>4</td>
+                            <td>75%</td>
+                            <td><span class="px-2 py-1 bg-orange-100 text-orange-800 rounded">Medium</span></td>
+                        </tr>
+                        <tr>
+                            <td>Abule-Egba</td>
+                            <td>3</td>
+                            <td>67%</td>
+                            <td><span class="px-2 py-1 bg-orange-100 text-orange-800 rounded">Medium</span></td>
+                        </tr>
+                        <tr>
+                            <td>Shomolu</td>
+                            <td>3</td>
+                            <td>100%</td>
+                            <td><span class="px-2 py-1 bg-green-100 text-green-800 rounded">Low</span></td>
+                        </tr>
+                        <tr>
+                            <td>Akowonjo</td>
+                            <td>2</td>
+                            <td>0%</td>
+                            <td><span class="px-2 py-1 bg-red-100 text-red-800 rounded">High</span></td>
+                        </tr>
+                        <tr>
+                            <td>Ikeja</td>
+                            <td>1</td>
+                            <td>0%</td>
+                            <td><span class="px-2 py-1 bg-yellow-100 text-yellow-800 rounded">Monitoring</span></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            
+            <div class="card">
+                <h3 class="text-xl font-bold mb-3" style="color: var(--ikeja-blue);">Undertaking-Level Hotspots</h3>
+                <p class="mb-4">Within business units, specific undertakings show higher vulnerability:</p>
+                <div class="space-y-3">
+                    <div class="p-3 rounded ikeja-bg-blue">
+                        <p class="font-bold">Ikorodu Business Unit</p>
+                        <p>Hotspot: Igbogbo & Lasunwon undertakings (4 incidents)</p>
+                    </div>
+                    <div class="p-3 rounded ikeja-bg-blue">
+                        <p class="font-bold">Oshodi Business Unit</p>
+                        <p>Hotspot: Igando undertaking (2 incidents)</p>
+                    </div>
+                    <div class="p-3 rounded ikeja-bg-blue">
+                        <p class="font-bold">Abule-Egba Business Unit</p>
+                        <p>Hotspot: Akute undertaking (2 incidents)</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Slide 5: Stolen Items Analysis -->
+    <div id="slide5" class="slide">
+        <h2 class="slide-title text-3xl font-bold">Stolen Items Analysis</h2>
+        
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-6">
+            <div class="col-span-2">
+                <div class="chart-container">
+                    <canvas id="stolenItemsChart"></canvas>
+                </div>
+            </div>
+            
+            <div class="card insight-card">
+                <h3 class="text-xl font-bold mb-3" style="color: var(--ikeja-blue);">Key Findings</h3>
+                <ul class="list-disc pl-5 space-y-2">
+                    <li><span class="font-bold">Target Preference:</span> 500mm² single core cables are consistently targeted (85% of incidents)</li>
+                    <li><span class="font-bold">Quantity Pattern:</span> Average theft involves 5-10 meters of cable</li>
+                    <li><span class="font-bold">Secondary Targets:</span> Incomer cables and upriser cables</li>
+                    <li><span class="font-bold">Material Value:</span> Estimated market value of materials exceeds ₦15 million</li>
+                    <li><span class="font-bold">Skilled Theft:</span> Precision targeting indicates technical knowledge</li>
+                </ul>
+            </div>
+        </div>
+        
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div class="card">
+                <h3 class="text-xl font-bold mb-3" style="color: var(--ikeja-blue);">Sample Incident Details</h3>
+                <table class="w-full">
+                    <thead>
+                        <tr>
+                            <th>Date</th>
+                            <th>Business Unit</th>
+                            <th>DT Name</th>
+                            <th>Items Stolen</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>20/01/2025</td>
+                            <td>Oshodi</td>
+                            <td>ISHERI OLOFIN</td>
+                            <td>2nos 500mm² single core cable (Red & Yellow phase)</td>
+                        </tr>
+                        <tr>
+                            <td>07/01/2025</td>
+                            <td>Shomolu</td>
+                            <td>COKER ROUNDABOUT I</td>
+                            <td>5 meters of 500mm² Single core cable</td>
+                        </tr>
+                        <tr>
+                            <td>17/01/2025</td>
+                            <td>Shomolu</td>
+                            <td>ADEBAYO MOKUOLU</td>
+                            <td>5 meters 500mm² Single Core Cable</td>
+                        </tr>
+                        <tr>
+                            <td>17/02/2025</td>
+                            <td>Ikorodu</td>
+                            <td>JESSE JETTA</td>
+                            <td>50 meters of 500mm single core cable</td>
+                        </tr>
+                        <tr>
+                            <td>23/02/2025</td>
+                            <td>Akowonjo</td>
+                            <td>GOLD ESTATE</td>
+                            <td>500mm² Incomer cables</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            
+            <div class="card">
+                <h3 class="text-xl font-bold mb-3" style="color: var(--ikeja-blue);">Target Analysis & Security Implications</h3>
+                
+                <div class="p-4 mb-4 ikeja-bg-orange rounded">
+                    <h4 class="font-bold">Material Profile: 500mm² Single Core Cable</h4>
+                    <ul class="list-disc pl-5 mt-2">
+                        <li>High copper content = high resale value</li>
+                        <li>Typically used for high-capacity connections</li>
+                        <li>Easily transported and concealed</li>
+                        <li>Established black market for recycling</li>
+                    </ul>
+                </div>
+                
+                <div class="p-4 ikeja-bg-blue rounded">
+                    <h4 class="font-bold">Security Implications</h4>
+                    <ul class="list-disc pl-5 mt-2">
+                        <li>Thieves demonstrate knowledge of high-value components</li>
+                        <li>Possible insider knowledge of electrical systems</li>
+                        <li>Coordinated theft operations with planned disposal routes</li>
+                        <li>Need for enhanced monitoring of high-value material</li>
+                        <li>Collaboration with recycling facilities to identify stolen material</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Slide 6: Transformer Capacity and Ownership Analysis -->
+    <div id="slide6" class="slide">
+        <h2 class="slide-title text-3xl font-bold">Transformer Capacity and Ownership Analysis</h2>
+        
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+            <div>
+                <h3 class="text-xl font-bold mb-3 text-center" style="color: var(--ikeja-blue);">Transformer Capacity Distribution</h3>
+                <div class="chart-container">
+                    <canvas id="capacityChart"></canvas>
+                </div>
+            </div>
+            
+            <div>
+                <h3 class="text-xl font-bold mb-3 text-center" style="color: var(--ikeja-blue);">Ownership Distribution</h3>
+                <div class="chart-container">
+                    <canvas id="ownershipChart"></canvas>
+                </div>
+            </div>
+        </div>
+        
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div class="card">
+                <h3 class="text-xl font-bold mb-3" style="color: var(--ikeja-blue);">Key Capacity Insights</h3>
+                <div class="space-y-4">
+                    <div class="p-3 rounded ikeja-bg-blue">
+                        <p class="font-bold">500KVA Transformers (80%)</p>
+                        <p>Overwhelmingly targeted, likely due to larger cable size and potentially higher material value</p>
+                    </div>
+                    <div class="p-3 rounded ikeja-bg-blue">
+                        <p class="font-bold">200KVA Transformers (10%)</p>
+                        <p>Less frequently targeted but still vulnerable</p>
+                    </div>
+                    <div class="p-3 rounded ikeja-bg-blue">
+                        <p class="font-bold">Other Capacities (10%)</p>
+                        <p>Lower incidence rate suggests opportunistic rather than planned targeting</p>
+                    </div>
+                    <div class="p-4 bg-yellow-100 border-l-4 border-yellow-500 rounded">
+                        <p class="font-bold">Security Alert</p>
+                        <p>The consistent targeting of 500KVA transformers indicates a pattern that should inform security resource allocation</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="card">
+                <h3 class="text-xl font-bold mb-3" style="color: var(--ikeja-blue);">Ownership Analysis</h3>
+                <div class="space-y-4">
+                    <div class="p-3 rounded ikeja-bg-orange">
+                        <p class="font-bold">Public Transformers (95%)</p>
+                        <p>Overwhelmingly targeted, suggesting:</p>
+                        <ul class="list-disc pl-5 mt-2">
+                            <li>Potentially less security monitoring than private installations</li>
+                            <li>Often located in more accessible, less restricted areas</li>
+                            <li>May have standardized components that are predictable targets</li>
+                        </ul>
+                    </div>
+                    <div class="p-3 rounded ikeja-bg-orange">
+                        <p class="font-bold">Private Transformers (5%)</p>
+                        <p>Rarely targeted, likely due to:</p>
+                        <ul class="list-disc pl-5 mt-2">
+                            <li>Enhanced security measures at private facilities</li>
+                            <li>Additional monitoring by property owners</li>
+                            <li>Often located within secured premises</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Slide 7: Incident Status Analysis -->
+    <div id="slide7" class="slide">
+        <h2 class="slide-title text-3xl font-bold">Incident Status Analysis</h2>
+        
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-6">
+            <div class="col-span-2">
+                <div class="chart-container">
+                    <canvas id="statusByBusinessUnitChart"></canvas>
+                </div>
+            </div>
+            
+            <div class="card insight-card">
+                <h3 class="text-xl font-bold mb-3" style="color: var(--ikeja-blue);">Resolution Overview</h3>
+                <div class="flex items-center justify-center mb-4">
+                    <div class="w-32 h-32 rounded-full border-8 relative" style="border-color: var(--ikeja-orange);">
+                        <div class="absolute inset-0 flex items-center justify-center flex-col">
+                            <span class="text-3xl font-bold" style="color: var(--ikeja-blue);">58%</span>
+                            <span class="text-sm">Resolution Rate</span>
+                        </div>
+                    </div>
+                </div>
+                <ul class="list-disc pl-5 space-y-2">
+                    <li><span class="font-bold">Resolved Cases:</span> 11 incidents (58%)</li>
+                    <li><span class="font-bold">Ongoing Cases:</span> 8 incidents (42%)</li>
+                    <li><span class="font-bold">Target Resolution:</span> 85% by end of Q1 2025</li>
+                    <li><span class="font-bold">Average Resolution Time:</span> 15 days for closed cases</li>
+                </ul>
+            </div>
+        </div>
+        
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div class="card">
+                <h3 class="text-xl font-bold mb-3" style="color: var(--ikeja-blue);">Business Unit Resolution Performance</h3>
+                <table class="w-full">
+                    <thead>
+                        <tr>
+                            <th>Business Unit</th>
+                            <th>Total Incidents</th>
+                            <th>Resolved</th>
+                            <th>Ongoing</th>
+                            <th>Resolution Rate</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Ikorodu</td>
+                            <td>5</td>
+                            <td>1</td>
+                            <td>4</td>
+                            <td>20%</td>
+                        </tr>
+                        <tr>
+                            <td>Oshodi</td>
+                            <td>4</td>
+                            <td>3</td>
+                            <td>1</td>
+                            <td>75%</td>
+                        </tr>
+                        <tr>
+                            <td>Shomolu</td>
+                            <td>3</td>
+                            <td>3</td>
+                            <td>0</td>
+                            <td>100%</td>
+                        </tr>
+                        <tr>
+                            <td>Abule-Egba</td>
+                            <td>3</td>
+                            <td>2</td>
+                            <td>1</td>
+                            <td>67%</td>
+                        </tr>
+                        <tr>
+                            <td>Akowonjo</td>
+                            <td>2</td>
+                            <td>0</td>
+                            <td>2</td>
+                            <td>0%</td>
+                        </tr>
+                        <tr>
+                            <td>Ikeja</td>
+                            <td>1</td>
+                            <td>0</td>
+                            <td>1</td>
+                            <td>0%</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            
+            <div class="card">
+                <h3 class="text-xl font-bold mb-3" style="color: var(--ikeja-blue);">Patterns & Best Practices</h3>
+                
+                <div class="mb-4">
+                    <h4 class="font-bold" style="color: var(--ikeja-orange);">High-Performing Business Units</h4>
+                    <div class="p-3 rounded ikeja-bg-blue mt-2">
+                        <p class="font-bold">Shomolu (100% Resolution)</p>
+                        <p>Best practices to replicate:</p>
+                        <ul class="list-disc pl-5 mt-1">
+                            <li>Rapid response protocols</li>
+                            <li>Community engagement program</li>
+                            <li>Enhanced coordination with law enforcement</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div>
+                    <h4 class="font-bold" style="color: var(--ikeja-orange);">Underperforming Business Units</h4>
+                    <div class="p-3 rounded ikeja-bg-orange mt-2">
+                        <p class="font-bold">Ikorodu (20% Resolution)</p>
+                        <p>Challenges to address:</p>
+                        <ul class="list-disc pl-5 mt-1">
+                            <li>Higher incident volume overwhelms resources</li>
+                            <li>Complex geographic territory</li>
+                            <li>Need for additional security personnel</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Slide 8: Temporal Analysis of Incidents -->
+    <div id="slide8" class="slide">
+        <h2 class="slide-title text-3xl font-bold">Temporal Analysis of Incidents</h2>
+        
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-6">
+            <div class="col-span-2">
+                <div class="chart-container">
+                    <canvas id="timelineChart"></canvas>
+                </div>
+            </div>
+            
+            <div class="card insight-card">
+                <h3 class="text-xl font-bold mb-3" style="color: var(--ikeja-blue);">Key Temporal Insights</h3>
+                <ul class="list-disc pl-5 space-y-2">
+                    <li><span class="font-bold">Peak Period:</span> Mid-January saw highest incidence rate</li>
+                    <li><span class="font-bold">Frequency:</span> Average of 4-5 incidents per week</li>
+                    <li><span class="font-bold">Weekend Bias:</span> Slight increase in incidents during weekends</li>
+                    <li><span class="font-bold">Monthly Trend:</span> Increasing trend observed through Q1</li>
+                    <li><span class="font-bold">Time Pattern:</span> Most incidents occur during nighttime hours (estimated)</li>
+                </ul>
+            </div>
+        </div>
+        
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div class="card">
+                <h3 class="text-xl font-bold mb-3" style="color: var(--ikeja-blue);">Weekly Distribution Pattern</h3>
+                <div class="chart-container h-64">
+                    <canvas id="weekdayChart"></canvas>
+                </div>
+                <div class="mt-4 p-3 rounded bg-yellow-50 border-l-4 border-yellow-500">
+                    <p class="font-bold">Security Insight</p>
+                    <p>Weekend incidents (Friday-Sunday) account for nearly 55% of all cases, suggesting reduced surveillance during these periods is being exploited.</p>
+                </div>
+            </div>
+            
+            <div class="card">
+                <h3 class="text-xl font-bold mb-3" style="color: var(--ikeja-blue);">Temporal Security Implications</h3>
+                
+                <div class="space-y-4">
+                    <div class="p-3 rounded ikeja-bg-blue">
+                        <p class="font-bold">Pattern Recognition</p>
+                        <p>Temporal clusters suggest coordinated activity rather than random opportunistic theft</p>
+                    </div>
+                    
+                    <div class="p-3 rounded ikeja-bg-blue">
+                        <p class="font-bold">Resource Allocation</p>
+                        <p>Security patrols should be intensified during identified high-risk periods (weekends and nighttime)</p>
+                    </div>
+                    
+                    <div class="p-3 rounded ikeja-bg-blue">
+                        <p class="font-bold">Predictive Measures</p>
+                        <p>Historical pattern analysis allows for predictive deployment of security resources to potential target areas</p>
+                    </div>
+                    
+                    <div class="p-3 rounded ikeja-bg-orange">
+                        <p class="font-bold">Recommended Patrol Schedule</p>
+                        <ul class="list-disc pl-5 mt-1">
+                            <li>Increase evening/night patrols (6pm-6am)</li>
+                            <li>Double weekend security presence</li>
+                            <li>Focus on identified hotspot areas during peak incident days</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Slide 9: Key Security Recommendations -->
+    <div id="slide9" class="slide">
+        <h2 class="slide-title text-3xl font-bold">Key Security Recommendations</h2>
+        
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+            <div class="recommendation p-4 bg-white rounded shadow">
+                <div class="flex items-start">
+                    <div class="bg-blue-100 p-2 rounded-full mr-3">
+                        <i class="fas fa-map-marked-alt text-xl" style="color: var(--ikeja-blue);"></i>
+                    </div>
+                    <div>
+                        <h3 class="text-xl font-bold mb-2" style="color: var(--ikeja-blue);">Targeted Patrols</h3>
+                        <p class="mb-2">Focus security resources on high-risk areas identified in the heat map visualization.</p>
+                        <ul class="list-disc pl-5 space-y-1">
+                            <li>Create patrol schedules prioritizing areas with multiple incidents</li>
+                            <li>Deploy additional resources to Ikorodu and Oshodi business units</li>
+                            <li>Establish regular patrol routes covering 500KVA transformers</li>
+                            <li>Implement visibility measures including security signage</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="recommendation p-4 bg-white rounded shadow">
+                <div class="flex items-start">
+                    <div class="bg-blue-100 p-2 rounded-full mr-3">
+                        <i class="fas fa-shield-alt text-xl" style="color: var(--ikeja-blue);"></i>
+                    </div>
+                    <div>
+                        <h3 class="text-xl font-bold mb-2" style="color: var(--ikeja-blue);">Material Security</h3>
+                        <p class="mb-2">Implement enhanced security measures for high-value components, particularly 500mm² cables.</p>
+                        <ul class="list-disc pl-5 space-y-1">
+                            <li>Install cable locking systems on vulnerable transformers</li>
+                            <li>Implement cable marking with Ikeja Electric identifiers</li>
+                            <li>Explore alternative materials less valuable to thieves</li>
+                            <li>Consider concealed routing of high-value cables</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="recommendation p-4 bg-white rounded shadow">
+                <div class="flex items-start">
+                    <div class="bg-blue-100 p-2 rounded-full mr-3">
+                        <i class="fas fa-tasks text-xl" style="color: var(--ikeja-blue);"></i>
+                    </div>
+                    <div>
+                        <h3 class="text-xl font-bold mb-2" style="color: var(--ikeja-blue);">Response Prioritization</h3>
+                        <p class="mb-2">Address ongoing cases first, particularly in areas with multiple incidents.</p>
+                        <ul class="list-disc pl-5 space-y-1">
+                            <li>Develop a response protocol categorizing incidents by severity</li>
+                            <li>Establish dedicated security response teams for high-risk areas</li>
+                            <li>Create escalation procedures for repeated targeting</li>
+                            <li>Set clear resolution timeframes with accountability</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="recommendation p-4 bg-white rounded shadow">
+                <div class="flex items-start">
+                    <div class="bg-blue-100 p-2 rounded-full mr-3">
+                        <i class="fas fa-users text-xl" style="color: var(--ikeja-blue);"></i>
+                    </div>
+                    <div>
+                        <h3 class="text-xl font-bold mb-2" style="color: var(--ikeja-blue);">Community Engagement</h3>
+                        <p class="mb-2">Establish neighborhood watch programs in vulnerable areas.</p>
+                        <ul class="list-disc pl-5 space-y-1">
+                            <li>Educate communities on reporting suspicious activity</li>
+                            <li>Create awareness about the impact of vandalism on power supply</li>
+                            <li>Establish community liaison officers in high-risk areas</li>
+                            <li>Provide incentives for information leading to resolution</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div class="recommendation p-4 bg-white rounded shadow">
+                <div class="flex items-start">
+                    <div class="bg-blue-100 p-2 rounded-full mr-3">
+                        <i class="fas fa-chart-line text-xl" style="color: var(--ikeja-blue);"></i>
+                    </div>
+                    <div>
+                        <h3 class="text-xl font-bold mb-2" style="color: var(--ikeja-blue);">Pattern Recognition</h3>
+                        <p class="mb-2">Use time-based analysis to identify when vandalization is most likely to occur.</p>
+                        <ul class="list-disc pl-5 space-y-1">
+                            <li>Schedule patrols according to temporal patterns</li>
+                            <li>Look for connections between incidents to identify organized activity</li>
+                            <li>Analyze methods used to identify signature techniques</li>
+                            <li>Monitor for evolving tactics and adapt security measures</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="recommendation p-4 bg-white rounded shadow">
+                <div class="flex items-start">
+                    <div class="bg-blue-100 p-2 rounded-full mr-3">
+                        <i class="fas fa-video text-xl" style="color: var(--ikeja-blue);"></i>
+                    </div>
+                    <div>
+                        <h3 class="text-xl font-bold mb-2" style="color: var(--ikeja-blue);">Preventive Measures</h3>
+                        <p class="mb-2">Install technology-based security solutions at high-risk locations.</p>
+                        <ul class="list-disc pl-5 space-y-1">
+                            <li>Deploy camera systems at vulnerable 500KVA transformers</li>
+                            <li>Implement motion detection systems with security alerts</li>
+                            <li>Consider tamper-evident seals with unique identifiers</li>
+                            <li>Explore IoT solutions for real-time monitoring</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="mt-6 p-4 bg-red-50 border-l-4 border-red-500 rounded">
+            <h3 class="text-xl font-bold mb-2" style="color: var(--ikeja-blue);">Critical Priority Areas</h3>
+            <p>Based on the data analysis, special attention should be given to Ikorodu and Oshodi business units, which show multiple incidents with high-value material theft. Consider establishing a task force specifically focused on these areas with dedicated resources and enhanced security measures.</p>
+        </div>
+    </div>
+
+    <!-- Slide 10: Conclusion and Next Steps -->
+    <div id="slide10" class="slide">
+        <h2 class="slide-title text-3xl font-bold">Conclusion and Next Steps</h2>
+        
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+            <div class="card">
+                <h3 class="text-xl font-bold mb-3" style="color: var(--ikeja-blue);">Key Conclusions</h3>
+                <ul class="list-disc pl-5 space-y-3">
+                    <li>
+                        <span class="font-bold">Pattern Identification:</span> 
+                        <p>Clear patterns have emerged in targeting of 500KVA public transformers and 500mm² cables across multiple business units</p>
+                    </li>
+                    <li>
+                        <span class="font-bold">Critical Hotspots:</span>
+                        <p>Ikorodu and Oshodi business units require immediate intervention with enhanced security measures</p>
+                    </li>
+                    <li>
+                        <span class="font-bold">Technical Knowledge:</span>
+                        <p>The precision of thefts indicates perpetrators have electrical infrastructure knowledge and may include insiders or former staff</p>
+                    </li>
+                    <li>
+                        <span class="font-bold">Resolution Gap:</span>
+                        <p>Variance in case resolution rates across business units indicates need for standardized response protocols</p>
+                    </li>
+                </ul>
+            </div>
+            
+            <div class="card insight-card">
+                <h3 class="text-xl font-bold mb-3" style="color: var(--ikeja-blue);">Benefits of Visual Analysis</h3>
+                <p class="mb-3">Implementing visualization strategies in QGIS and Power BI will help Ikeja Electric Plc's security team:</p>
+                <div class="space-y-3">
+                    <div class="p-3 rounded bg-white">
+                        <p><i class="fas fa-map-marked-alt mr-2" style="color: var(--ikeja-orange);"></i> <span class="font-bold">Optimize patrol routes</span> and security resource allocation</p>
+                    </div>
+                    <div class="p-3 rounded bg-white">
+                        <p><i class="fas fa-chart-pie mr-2" style="color: var(--ikeja-orange);"></i> <span class="font-bold">Enable data-driven decision making</span> for security operations</p>
+                    </div>
+                    <div class="p-3 rounded bg-white">
+                        <p><i class="fas fa-clock mr-2" style="color: var(--ikeja-orange);"></i> <span class="font-bold">Identify temporal patterns</span> for strategic timing of security measures</p>
+                    </div>
+                    <div class="p-3 rounded bg-white">
+                        <p><i class="fas fa-shield-alt mr-2" style="color: var(--ikeja-orange);"></i> <span class="font-bold">Track effectiveness of security measures</span> through regular updates</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="card">
+            <h3 class="text-xl font-bold mb-3" style="color: var(--ikeja-blue);">Implementation Roadmap</h3>
+            <div class="relative">
+                <div class="absolute top-0 bottom-0 left-8 border-l-2 border-gray-300"></div>
+                
+                <div class="flex mb-6 relative">
+                    <div class="w-16 h-16 rounded-full bg-blue-100 flex items-center justify-center z-10">
+                        <span class="text-xl font-bold" style="color: var(--ikeja-blue);">1</span>
+                    </div>
+                    <div class="ml-4">
+                        <h4 class="text-lg font-bold" style="color: var(--ikeja-blue);">Immediate Actions (Within 7 Days)</h4>
+                        <ul class="list-disc pl-5 mt-2">
+                            <li>Establish security task force for critical areas (Ikorodu, Oshodi)</li>
+                            <li>Implement emergency patrol schedule for high-risk transformers</li>
+                            <li>Begin stakeholder communication regarding enhanced security measures</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="flex mb-6 relative">
+                    <div class="w-16 h-16 rounded-full bg-blue-100 flex items-center justify-center z-10">
+                        <span class="text-xl font-bold" style="color: var(--ikeja-blue);">2</span>
+                    </div>
+                    <div class="ml-4">
+                        <h4 class="text-lg font-bold" style="color: var(--ikeja-blue);">Short-Term Implementation (30 Days)</h4>
+                        <ul class="list-disc pl-5 mt-2">
+                            <li>Deploy initial security hardware (cameras, motion sensors) to highest-risk locations</li>
+                            <li>Develop standardized incident response protocols across all business units</li>
+                            <li>Begin community engagement program in top 5 hotspot areas</li>
+                            <li>Implement material security measures for 500mm² cables</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="flex relative">
+                    <div class="w-16 h-16 rounded-full bg-blue-100 flex items-center justify-center z-10">
+                        <span class="text-xl font-bold" style="color: var(--ikeja-blue);">3</span>
+                    </div>
+                    <div class="ml-4">
+                        <h4 class="text-lg font-bold" style="color: var(--ikeja-blue);">Long-Term Strategy (90+ Days)</h4>
+                        <ul class="list-disc pl-5 mt-2">
+                            <li>Roll out comprehensive visualization dashboard for security operations</li>
+                            <li>Conduct efficacy review of implemented security measures</li>
+                            <li>Expand technology deployment based on initial results</li>
+                            <li>Implement regular reporting cycle with key performance indicators</li>
+                            <li>Establish coordination with law enforcement and other utilities for intelligence sharing</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="mt-6 p-4 text-center">
+            <h3 class="text-xl font-bold mb-3" style="color: var(--ikeja-blue);">Prepared for Ikeja Electric Plc Security Operations</h3>
+            <p class="text-gray-600">March 2025</p>
+        </div>
+    </div>
+
+    <script>
+        // Business Unit Chart
+        const businessUnitCtx = document.getElementById('businessUnitChart').getContext('2d');
+        new Chart(businessUnitCtx, {
+            type: 'bar',
+            data: {
+                labels: ['Ikorodu', 'Oshodi', 'Abule-Egba', 'Shomolu', 'Akowonjo', 'Ikeja'],
+                datasets: [{
+                    label: 'Number of Incidents',
+                    data: [5, 4, 3, 3, 2, 1],
+                    backgroundColor: '#F47920',
+                    borderColor: '#F47920',
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        title: {
+                            display: true,
+                            text: 'Number of Incidents'
+                        }
+                    },
+                    x: {
+                        title: {
+                            display: true,
+                            text: 'Business Unit'
+                        }
+                    }
+                },
+                plugins: {
+                    title: {
+                        display: true,
+                        text: 'Incidents by Business Unit',
+                        font: {
+                            size: 16
+                        }
+                    }
+                }
+            }
+        });
+
+        // Stolen Items Chart
+        const stolenItemsCtx = document.getElementById('stolenItemsChart').getContext('2d');
+        new Chart(stolenItemsCtx, {
+            type: 'pie',
+            data: {
+                labels: ['500mm² Single Core Cable', 'Incomer Cables', 'Upriser Cable', 'Other Items'],
+                datasets: [{
+                    data: [85, 8, 5, 2],
+                    backgroundColor: ['#F47920', '#0053A0', '#4CAF50', '#9C27B0'],
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    title: {
+                        display: true,
+                        text: 'Types of Items Stolen (%)',
+                        font: {
+                            size: 16
+                        }
+                    },
+                    legend: {
+                        position: 'right'
+                    }
+                }
+            }
+        });
+
+        // Capacity Chart
+        const capacityCtx = document.getElementById('capacityChart').getContext('2d');
+        new Chart(capacityCtx, {
+            type: 'doughnut',
+            data: {
+                labels: ['500KVA', '200KVA', '50KVA', 'Other'],
+                datasets: [{
+                    data: [80, 10, 5, 5],
+                    backgroundColor: ['#F47920', '#0053A0', '#4CAF50', '#9C27B0'],
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    title: {
+                        display: true,
+                        text: 'Targeted Transformer Capacities (%)',
+                        font: {
+                            size: 16
+                        }
+                    }
+                }
+            }
+        });
+
+        // Ownership Chart
+        const ownershipCtx = document.getElementById('ownershipChart').getContext('2d');
+        new Chart(ownershipCtx, {
+            type: 'doughnut',
+            data: {
+                labels: ['Public', 'Private'],
+                datasets: [{
+                    data: [95, 5],
+                    backgroundColor: ['#0053A0', '#F47920'],
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    title: {
+                        display: true,
+                        text: 'Transformer Ownership (%)',
+                        font: {
+                            size: 16
+                        }
+                    }
+                }
+            }
+        });
+
+        // Status by Business Unit Chart
+        const statusByBusinessUnitCtx = document.getElementById('statusByBusinessUnitChart').getContext('2d');
+        new Chart(statusByBusinessUnitCtx, {
+            type: 'bar',
+            data: {
+                labels: ['Ikorodu', 'Oshodi', 'Shomolu', 'Abule-Egba', 'Akowonjo', 'Ikeja'],
+                datasets: [
+                    {
+                        label: 'Resolved',
+                        data: [1, 3, 3, 2, 0, 0],
+                        backgroundColor: '#4CAF50',
+                        borderColor: '#4CAF50',
+                        borderWidth: 1
+                    },
+                    {
+                        label: 'Ongoing',
+                        data: [4, 1, 0, 1, 2, 1],
+                        backgroundColor: '#F44336',
+                        borderColor: '#F44336',
+                        borderWidth: 1
+                    }
+                ]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        stacked: true,
+                        title: {
+                            display: true,
+                            text: 'Number of Incidents'
+                        }
+                    },
+                    x: {
+                        stacked: true,
+                        title: {
+                            display: true,
+                            text: 'Business Unit'
+                        }
+                    }
+                },
+                plugins: {
+                    title: {
+                        display: true,
+                        text: 'Incident Status by Business Unit',
+                        font: {
+                            size: 16
+                        }
+                    }
+                }
+            }
+        });
+
+        // Timeline Chart
+        const timelineCtx = document.getElementById('timelineChart').getContext('2d');
+        new Chart(timelineCtx, {
+            type: 'line',
+            data: {
+                labels: ['Week 1', 'Week 2', 'Week 3', 'Week 4'],
+                datasets: [{
+                    label: 'Number of Incidents',
+                    data: [3, 5, 7, 4],
+                    backgroundColor: 'rgba(0, 83, 160, 0.2)',
+                    borderColor: '#0053A0',
+                    borderWidth: 2,
+                    fill: true,
+                    tension: 0.3
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        title: {
+                            display: true,
+                            text: 'Number of Incidents'
+                        }
+                    },
+                    x: {
+                        title: {
+                            display: true,
+                            text: 'January 2025'
+                        }
+                    }
+                },
+                plugins: {
+                    title: {
+                        display: true,
+                        text: 'Incident Frequency Over Time',
+                        font: {
+                            size: 16
+                        }
+                    }
+                }
+            }
+        });
+
+        // Weekday Chart
+        const weekdayCtx = document.getElementById('weekdayChart').getContext('2d');
+        new Chart(weekdayCtx, {
+            type: 'bar',
+            data: {
+                labels: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'],
+                datasets: [{
+                    label: 'Number of Incidents',
+                    data: [2, 3, 2, 2, 4, 3, 3],
+                    backgroundColor: '#F47920',
+                    borderColor: '#F47920',
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        title: {
+                            display: true,
+                            text: 'Number of Incidents'
+                        }
+                    }
+                },
+                plugins: {
+                    title: {
+                        display: true,
+                        text: 'Incidents by Day of Week',
+                        font: {
+                            size: 16
+                        }
+                    }
+                }
+            }
+        });
+    </script>
+</body>
+</html>
+    <script id="html_badge_script1">
+        window.__genspark_remove_badge_link = "https://www.genspark.ai/api/html_badge/" +
+            "remove_badge?token=To%2FBnjzloZ3UfQdcSaYfDvM08ZIIWc7zA%2Fhp2tz7IrRHuCuHL8W1ZTU8j%2BFmAGgx4aQrXoPvy149g%2FTeAc8QLQoT59VTj%2BL5LzKi1H3Uiwx3Du7Bwd7AhD4plsOCIQTm3whNuqlsc6IMZHQ4OizX2D%2FvR%2BQYa56iFvDPSfcf2zGz3ShOSvcOqf5ciuS%2B8RIkRHrbxCHA%2BDqACvJ2HLyayW3JG%2FpQS%2FQumj8SRokRSX4u8YXUKM9KSeB8CFGW2t%2BisH9swjPwq%2Bu7EaQuSlrqRTyfepZfKs4z0Wc3AA9IQHqCQBhxxjtB1mG4CABGTNZ4uIzn861Udoe6F%2BT2loC%2B1%2FYUuZ3GPPfT8JpP9IhkxEPqPNnWQ1njeKBkbOQY5hfDRNjyb8lnTk5btDUSDri%2BW9nap343pNgR%2F1bMpujR0cd6FXu4NkpKy0XZUMtb8%2FnL4tlg2mf2%2FKgYQZkf17VLaU3j27qpFXvBocQXLjpc6kqpV33SBYQrtKYR0OBxFlzYXw61ZpJGQqJrNP57Fz7uJ8bmk1yqK1d6L7S%2FiVXWkKJJS5EZYWRQYcNdH6aCO%2BMkFRKnWvwrv9eDE29R6mLyZqzmSnBigihgGFL2VaSgzC018iF%2FvEAXYYCIGGPOOSCT8X6cvAZXOJos8NJarJXE4w%3D%3D";
+        window.__genspark_locale = "en-US";
+        window.__genspark_token = "To/BnjzloZ3UfQdcSaYfDvM08ZIIWc7zA/hp2tz7IrRHuCuHL8W1ZTU8j+FmAGgx4aQrXoPvy149g/TeAc8QLQoT59VTj+L5LzKi1H3Uiwx3Du7Bwd7AhD4plsOCIQTm3whNuqlsc6IMZHQ4OizX2D/vR+QYa56iFvDPSfcf2zGz3ShOSvcOqf5ciuS+8RIkRHrbxCHA+DqACvJ2HLyayW3JG/pQS/Qumj8SRokRSX4u8YXUKM9KSeB8CFGW2t+isH9swjPwq+u7EaQuSlrqRTyfepZfKs4z0Wc3AA9IQHqCQBhxxjtB1mG4CABGTNZ4uIzn861Udoe6F+T2loC+1/YUuZ3GPPfT8JpP9IhkxEPqPNnWQ1njeKBkbOQY5hfDRNjyb8lnTk5btDUSDri+W9nap343pNgR/1bMpujR0cd6FXu4NkpKy0XZUMtb8/nL4tlg2mf2/KgYQZkf17VLaU3j27qpFXvBocQXLjpc6kqpV33SBYQrtKYR0OBxFlzYXw61ZpJGQqJrNP57Fz7uJ8bmk1yqK1d6L7S/iVXWkKJJS5EZYWRQYcNdH6aCO+MkFRKnWvwrv9eDE29R6mLyZqzmSnBigihgGFL2VaSgzC018iF/vEAXYYCIGGPOOSCT8X6cvAZXOJos8NJarJXE4w==";
+    </script>
+    
